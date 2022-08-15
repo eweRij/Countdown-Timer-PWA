@@ -8,24 +8,22 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState, useEffect } from "react";
 import "./Clock.scss";
+import { actionButtonsState } from "../../store/initialState";
+import ActionButton from "../ActionButton/ActionButton";
+import {
+  handleChangeTime,
+  handleSubmitTime,
+  watchStopViewMin,
+  watchStopViewSec,
+} from "../../helpers/timeHelpers";
 
 const theme = createTheme();
 
 export const Clock: React.FC = () => {
-  const [time, setTime] = useState(0);
-  const [running, setRunning] = useState(false);
-  const [timeGiven, setTimeGiven] = useState(0);
+  const [time, setTime] = useState<number>(0);
+  const [running, setRunning] = useState<boolean>(false);
+  const [timeGiven, setTimeGiven] = useState<number>(0);
 
-  const handleChange = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const { value } = e.target as HTMLInputElement;
-    setTimeGiven(parseInt(value));
-  };
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const { value } = e.target as HTMLInputElement;
-    setTime(timeGiven);
-  };
   useEffect(() => {
     let interval: any;
     if (running) {
@@ -39,28 +37,18 @@ export const Clock: React.FC = () => {
     time === 0 && setRunning(false);
     return () => clearInterval(interval);
   }, [running, time]);
-  const watchStopViewMin = () => {
-    const minutes = Math.floor(time / 60);
-    if (minutes > 9) {
-      return minutes;
-    }
-    return "0" + minutes;
-  };
-  const watchStopViewSec = () => {
-    const seconds = time - Math.floor(time / 60) * 60;
-    if (seconds > 9) {
-      return seconds;
-    }
-    return "0" + seconds;
-  };
-  console.log(running);
+
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{ display: "flex", flexDirection: "column" }}
+      >
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 9,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -68,20 +56,21 @@ export const Clock: React.FC = () => {
             height: "75vh",
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" sx={{ textAlign: "center" }}>
             Twój prywatny stoper
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={(e: React.SyntheticEvent) =>
+              handleSubmitTime(e, timeGiven, setTime)
+            }
             noValidate
             sx={{
               mt: 1,
-              marginBottom: "50px",
+              marginBottom: "20px",
               backgroundColor: "white important",
             }}
           >
-            
             <TextField
               sx={{ backgroundColor: "white !important" }}
               margin="normal"
@@ -91,7 +80,9 @@ export const Clock: React.FC = () => {
               name="time"
               autoFocus
               variant="filled"
-              onChange={handleChange}
+              onChange={(e: React.SyntheticEvent) =>
+                handleChangeTime(e, setTimeGiven)
+              }
             />
 
             <Button
@@ -113,52 +104,39 @@ export const Clock: React.FC = () => {
               component="h1"
               variant="h1"
             >
-              {!time ? "00" : watchStopViewMin()}:
-              {!time ? "00" : watchStopViewSec()}
+              {!time ? "00" : watchStopViewMin(time)}:
+              {!time ? "00" : watchStopViewSec(time)}
             </Typography>
           ) : (
             <Typography component="h1" variant="h1">
-              {!time ? "00" : watchStopViewMin()}:
-              {!time ? "00" : watchStopViewSec()}
+              {!time ? "00" : watchStopViewMin(time)}:
+              {!time ? "00" : watchStopViewSec(time)}
             </Typography>
           )}
 
           <Box
             sx={{
               display: "flex",
+              flexWrap: "wrap",
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: "center",
               width: "100%",
             }}
           >
-            <Button
-              onClick={() => setRunning(true)}
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              START
-            </Button>
-            <Button
-              onClick={() => setRunning(false)}
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              STOP
-            </Button>
-            <Button
-              onClick={() => setTime(0)}
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              ZERUJ
-            </Button>
-            <Button
-              onClick={() => setTime(120)}
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              USTAW 2 MIN
-            </Button>
+            {actionButtonsState.map((btn, id) => {
+              const { label, time } = btn;
+              return (
+                <ActionButton
+                  key={label + id}
+                  handleTime={
+                    typeof time === "boolean"
+                      ? () => setRunning(time)
+                      : () => setTime(time)
+                  }
+                  label={label}
+                />
+              );
+            })}
           </Box>
         </Box>
       </Container>
