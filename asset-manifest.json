@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/Countdown-Timer/static/css/main.dea1cbfe.css",
-    "main.js": "/Countdown-Timer/static/js/main.a672292c.js",
-    "index.html": "/Countdown-Timer/index.html",
-    "main.dea1cbfe.css.map": "/Countdown-Timer/static/css/main.dea1cbfe.css.map",
-    "main.a672292c.js.map": "/Countdown-Timer/static/js/main.a672292c.js.map"
+    "main.css": "/static/css/main.dea1cbfe.css",
+    "main.js": "/static/js/main.b9303f44.js",
+    "service-worker.js": "/service-worker.js",
+    "index.html": "/index.html",
+    "main.dea1cbfe.css.map": "/static/css/main.dea1cbfe.css.map",
+    "main.b9303f44.js.map": "/static/js/main.b9303f44.js.map"
   },
   "entrypoints": [
     "static/css/main.dea1cbfe.css",
-    "static/js/main.a672292c.js"
+    "static/js/main.b9303f44.js"
   ]
 }
