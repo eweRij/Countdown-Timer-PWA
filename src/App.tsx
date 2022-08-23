@@ -1,5 +1,5 @@
 import React from "react";
-import { Clock } from "./Clock/Clock";
+import { Clock } from "./components/Clock/Clock";
 
 const App: React.FC = () => {
   return (
