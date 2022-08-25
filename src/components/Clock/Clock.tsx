@@ -16,6 +16,7 @@ import {
   watchStopViewMin,
   watchStopViewSec,
 } from "../../helpers/timeHelpers";
+import tick from "../../assets/tick.mp3";
 
 const theme = createTheme();
 
@@ -25,13 +26,20 @@ export const Clock: React.FC = () => {
   const [timeGiven, setTimeGiven] = useState<number>(0);
 
   useEffect(() => {
-    let interval: any;
+    const audioEl = document.getElementsByClassName(
+      "audio-element"
+    )[0] as HTMLAudioElement | null;
+
+    let interval: NodeJS.Timer;
     if (running) {
       interval = setInterval(() => {
+        audioEl && audioEl.play();
         setTime((prevTime) => prevTime - 1);
       }, 1000);
-    } else if (!running || time === 0) {
-      clearInterval(interval);
+
+      if (!running || time === 0) {
+        clearInterval(interval);
+      }
     }
 
     time === 0 && setRunning(false);
@@ -40,6 +48,9 @@ export const Clock: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <audio className="audio-element">
+        <source src={tick} type="audio/mp3" />
+      </audio>
       <Container
         component="main"
         maxWidth="xs"
