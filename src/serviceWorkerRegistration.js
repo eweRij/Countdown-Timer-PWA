@@ -52,6 +52,29 @@ export function register(config) {
       }
     });
   }
+
+  //custome install propmpt showing
+
+  let deferredPrompt;
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    console.log(deferredPrompt);
+  });
+  //  "homepage": "https://eweRij.github.com/Countdown-Timer-PWA",
+  const installApp = document.getElementById("installBtn");
+  console.log(installApp);
+  console.log(installApp);
+  installApp.addEventListener("click", async () => {
+    console.log("klik");
+    if (deferredPrompt !== null) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === "accepted") {
+        deferredPrompt = null;
+      }
+    }
+  });
 }
 
 function registerValidSW(swUrl, config) {

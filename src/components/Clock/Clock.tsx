@@ -70,6 +70,15 @@ export const Clock: React.FC = () => {
           <Typography component="h1" variant="h5" sx={{ textAlign: "center" }}>
             Twój prywatny stoper
           </Typography>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            id="installBtn"
+          >
+            Zainstaluj
+          </Button>
           <Box
             component="form"
             onSubmit={(e: React.SyntheticEvent) =>
