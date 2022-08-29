@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import DownloadForOfflineOutlinedIcon from "@mui/icons-material/DownloadForOfflineOutlined";
 import { useState, useEffect } from "react";
 import "./Clock.scss";
 import { actionButtonsState } from "../../store/initialState";
@@ -67,18 +68,19 @@ export const Clock: React.FC = () => {
             height: "75vh",
           }}
         >
+          {" "}
+          <Button
+            type="button"
+            variant="contained"
+            sx={{ mt: 4, mb: 2, alignSelf: "flex-end" }}
+            id="installBtn"
+            color="warning"
+          >
+            <DownloadForOfflineOutlinedIcon />
+          </Button>
           <Typography component="h1" variant="h5" sx={{ textAlign: "center" }}>
             Twój prywatny stoper
           </Typography>
-          <Button
-            type="button"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            id="installBtn"
-          >
-            Zainstaluj
-          </Button>
           <Box
             component="form"
             onSubmit={(e: React.SyntheticEvent) =>
@@ -111,7 +113,7 @@ export const Clock: React.FC = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              OK!!
+              OK
             </Button>
           </Box>
           {time < 6 && time > 0 ? (
@@ -133,7 +135,6 @@ export const Clock: React.FC = () => {
               {!time ? "00" : watchStopViewSec(time)}
             </Typography>
           )}
-
           <Box
             sx={{
               display: "flex",
