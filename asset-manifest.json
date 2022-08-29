@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Countdown-Timer-PWA/static/css/main.dea1cbfe.css",
-    "main.js": "/Countdown-Timer-PWA/static/js/main.56116a78.js",
+    "main.js": "/Countdown-Timer-PWA/static/js/main.1a04021f.js",
     "service-worker.js": "/Countdown-Timer-PWA/service-worker.js",
     "static/media/tick.mp3": "/Countdown-Timer-PWA/static/media/tick.0f0987b8822cb885d5aa.mp3",
     "index.html": "/Countdown-Timer-PWA/index.html",
     "main.dea1cbfe.css.map": "/Countdown-Timer-PWA/static/css/main.dea1cbfe.css.map",
-    "main.56116a78.js.map": "/Countdown-Timer-PWA/static/js/main.56116a78.js.map"
+    "main.1a04021f.js.map": "/Countdown-Timer-PWA/static/js/main.1a04021f.js.map"
   },
   "entrypoints": [
     "static/css/main.dea1cbfe.css",
-    "static/js/main.56116a78.js"
+    "static/js/main.1a04021f.js"
   ]
 }
