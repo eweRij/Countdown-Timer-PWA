@@ -57,6 +57,7 @@ export function register(config) {
 
   let deferredPrompt;
   window.addEventListener("beforeinstallprompt", (e) => {
+    installApp.style.display = "block";
     e.preventDefault();
     deferredPrompt = e;
   });
@@ -65,12 +66,11 @@ export function register(config) {
 
   installApp.addEventListener("click", async () => {
     if (deferredPrompt !== null) {
-      installApp.style.display = "visible";
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
       if (outcome === "accepted") {
+        installApp.style.display = "none";
         deferredPrompt = null;
-        installApp.style.display = "hidden";
       }
     }
   });
