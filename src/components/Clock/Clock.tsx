@@ -72,7 +72,7 @@ export const Clock: React.FC = () => {
           <Button
             type="button"
             variant="contained"
-            sx={{ mt: 4, mb: 2, alignSelf: "flex-end" }}
+            sx={{ mt: 4, mb: 2, alignSelf: "flex-end", display: "none" }}
             id="installBtn"
             color="warning"
           >

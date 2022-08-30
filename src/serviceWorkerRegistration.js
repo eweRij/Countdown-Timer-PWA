@@ -69,7 +69,7 @@ export function register(config) {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
       if (outcome === "accepted") {
-        installApp.style.display = "none";
+        // installApp.style.display = "none";
         deferredPrompt = null;
       }
     }
